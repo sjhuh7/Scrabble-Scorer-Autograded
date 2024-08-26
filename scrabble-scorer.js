@@ -19,7 +19,7 @@ function oldScrabbleScorer(word) {
 	for (let i = 0; i < word.length; i++) {
  
 	  for (const pointValue in oldPointStructure) {
- 
+  
 		 if (oldPointStructure[pointValue].includes(word[i])) {
 			letterPoints += `Points for '${word[i]}': ${pointValue}\n`
 		 }
@@ -28,6 +28,7 @@ function oldScrabbleScorer(word) {
 	}
 	return letterPoints;
  }
+ // for in loop used to check if word[i] is in oldpoint structure arrays
 
 // your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
@@ -36,12 +37,12 @@ function initialPrompt() {
    let word = input.question("let's play some scrabble! Enter a word: ")
    return word;
 };
-
+//prompts user to enter word and asks question
 function simpleScorer(word) {
    word = word.toUpperCase();
    return word.length
 };
-
+//returns the wordlength to calculate score of word, 1 point for each letter, alternate scoring method
 const vowels = ["A", "E", "I", "O", "U"]
 function vowelBonusScorer(word) {
    word = word.toUpperCase();
@@ -57,10 +58,12 @@ function vowelBonusScorer(word) {
    return score;
 
 }
+// Gives bonus points for each vowel using for loop going through each letter of (word), alternate scoring method
 
 
 
 let newPointStructure = transform(oldPointStructure);
+//variable holds transformed (oldpointstructure)
 
 //let simpleScorer;
 
@@ -85,6 +88,7 @@ const scoringAlgorithms = [
       scorerFunction: scrabbleScorer
    }
 ];
+//Array of all the scoring options
 
 function scorerPrompt() {
    console.log ("Choose which scoring system you would like to use? ");
@@ -104,6 +108,7 @@ function scorerPrompt() {
 
 
 }
+//used to show and prompt user to select a scoring option. returns selected one from scoringalgorithms array. If invalid answer is chosen it repeats and returns scorerprompt
 
 function transform(oldPointStructure) {
    let newPointStructure = {};
@@ -118,14 +123,14 @@ function transform(oldPointStructure) {
    return newPointStructure;
 
 };
-
+// Changes the original scoring into a new one, loops through oldpoint structure and letters, assigning each letter a point value.
 function runProgram() {
    let word = initialPrompt();
    let selectedAlgorithm = scorerPrompt();
    let score = selectedAlgorithm.scorerFunction(word);
    console.log("score for '" + word + "' using" + selectedAlgorithm.name + ": " + score);
 }
-
+//First collects word using initalprompt, then collects the selected algorithm. then it prints the score for the user
 function scrabbleScorer (word) {
    word = word.toLowerCase();
    let score = 0;
@@ -136,6 +141,7 @@ function scrabbleScorer (word) {
    }
    return score;
 }
+// initializes score
 // Don't write any code below this line //
 // And don't change these or your program will not run as expected //
 module.exports = {
